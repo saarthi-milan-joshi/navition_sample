@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'route1/list_item_screen.dart';
-
+import 'route2/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Home Page'),
     );
   }
 }
@@ -52,6 +53,38 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () {
+      exit(0);
+    },
+  );
+
+  Widget cancelButton = TextButton(
+    child: const Text("Cancel"),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text("Exit"),
+    content: const Text("Are you sure you want to exit?"),
+    actions: [okButton, cancelButton],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
@@ -62,9 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return WillPopScope(
-      onWillPop: (){
-        exit(0);
-      },
+      onWillPop: () => showAlertDialog(context),
       child: Scaffold(
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
@@ -97,7 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const FirstScreen(fromWhere: 'HomeScreen'),
+                      builder: (context) =>
+                          const ListItemScreen(fromWhere: 'HomeScreen'),
                     ),
                   );
                 },
@@ -105,10 +137,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Route 1',
                 ),
               ),
-
               ElevatedButton(
                 onPressed: () {
-                  
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                  );
                 },
                 child: const Text(
                   'Route 2',

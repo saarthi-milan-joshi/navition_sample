@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'list_item_screen.dart';
 
 class CheckoutScreen extends StatefulWidget {
-  const CheckoutScreen({ Key? key, this.fromWhere }) : super(key: key);
+  const CheckoutScreen({Key? key, this.fromWhere}) : super(key: key);
 
-      final String? fromWhere;
+  final String? fromWhere;
 
   @override
   State<CheckoutScreen> createState() => _CheckoutScreenState();
@@ -14,52 +14,52 @@ class CheckoutScreen extends StatefulWidget {
 class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   Widget build(BuildContext context) {
-       return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Checkout Screen'),
         leading: IconButton(
-          icon:  const Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
-                       Navigator.pop(context);
-           /* Navigator.pushReplacement(
+            Navigator.pop(context);
+            /* Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FirstScreen(fromWhere: 'SecondScreen',)),
             );  */
           },
         ),
-
       ),
       body: Column(
         children: [
-           ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const FirstScreen(fromWhere: 'CheckoutScreen'),
-                  ),
-                ); 
-              },
-              child: const Text(
-                'Success',
-              ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const ListItemScreen(fromWhere: 'CheckoutScreen'),
+                ),
+              );
+            },
+            child: const Text(
+              'Success',
             ),
-             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-                /* Navigator.push(
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+              /* Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const SecondScreen(),
                   ),
                 ); */
-              },
-              child: const Text(
-                'Failer',
-              ),
+            },
+            child: const Text(
+              'Failer',
             ),
-            Text('From Where ${widget.fromWhere}')
+          ),
+          Text('From Where ${widget.fromWhere}')
         ],
       ),
     );

@@ -1,64 +1,93 @@
 import 'package:flutter/material.dart';
+import 'package:navigation_sample/route1/list_item_details.dart';
 import './checkout_screen.dart';
 import 'list_item_screen.dart';
 
-class SecondScreen extends StatefulWidget {
+class CartScreen extends StatefulWidget {
+  final String? fromWhere;
 
-    final String? fromWhere;
-
-
-  const SecondScreen({ Key? key, this.fromWhere }) : super(key: key);
+  const CartScreen({Key? key, this.fromWhere}) : super(key: key);
 
   @override
-  State<SecondScreen> createState() => _SecondScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _SecondScreenState extends State<SecondScreen> {
-
-
+class _CartScreenState extends State<CartScreen> {
   TextEditingController textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-      appBar: AppBar(
-        title: const Text('Second Screen'),
-        leading: IconButton(
-          icon:  const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const FirstScreen(fromWhere: 'SecondScreen',)),
-            ); 
-          },
+    return WillPopScope(
+      onWillPop: () async {
+        if (widget.fromWhere == 'ListItemScreen') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ListItemScreen(
+                      fromWhere: 'CartScreen',
+                    )),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ListItemDetailsScreen()),
+          );
+        }
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Cart Screen'),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              if (widget.fromWhere == 'ListItemScreen') {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ListItemScreen(
+                            fromWhere: 'CartScreen',
+                          )),
+                );
+              } else {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ListItemDetailsScreen()),
+                );
+              }
+            },
+          ),
         ),
-
-      ),
-      body: Column(
-        children: [
-             Padding(
+        body: Column(
+          children: [
+            Padding(
               padding: const EdgeInsets.all(20.0),
               child: TextFormField(
                 controller: textEditingController,
               ),
             ),
-           ElevatedButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const CheckoutScreen(fromWhere: 'SecondScreen'),
+                    builder: (context) =>
+                        const CheckoutScreen(fromWhere: 'CartScreen'),
                   ),
-                ); 
+                );
               },
               child: const Text(
                 'Next',
               ),
             ),
-
-            SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             Text('From Where ${widget.fromWhere}')
-        ],
+          ],
+        ),
       ),
     );
   }

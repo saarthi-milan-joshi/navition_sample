@@ -1,50 +1,90 @@
 import 'package:flutter/material.dart';
 import 'package:navigation_sample/main.dart';
+import 'package:navigation_sample/route1/list_item_details.dart';
+import 'package:navigation_sample/route1/setting_screen.dart';
 import 'cart_screen.dart';
 
-class FirstScreen extends StatefulWidget {
+class ListItemScreen extends StatefulWidget {
   final String? fromWhere;
 
-  const FirstScreen({Key? key, this.fromWhere}) : super(key: key);
+  const ListItemScreen({Key? key, this.fromWhere}) : super(key: key);
 
   @override
-  State<FirstScreen> createState() => _FirstScreenState();
+  State<ListItemScreen> createState() => _ListItemScreenState();
 }
 
-class _FirstScreenState extends State<FirstScreen> {
+class _ListItemScreenState extends State<ListItemScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('First Screen'),
-        leading: IconButton(
-          icon:  const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Flutter Demo Home Page')),
-            ); 
-          },
-        ),
-      ),
-      body: Column(
-        children: [
-          ElevatedButton(
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacement(  
+          context,
+          MaterialPageRoute(
+              builder: (context) => const MyHomePage(title: 'Home Page')),
+        );
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SettingScreen(
+                            fromWhere: 'ListitemScreen',
+                          )),
+                );
+              },
+              icon: const Icon(Icons.settings),
+            ),
+          ],
+          title: const Text('List Item Screen'),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      const SecondScreen(fromWhere: 'FirstScreen'),
-                ),
+                    builder: (context) => const MyHomePage(title: 'Home Page')),
               );
             },
-            child: const Text(
-              'Next',
-            ),
           ),
-          Text('From Where ${widget.fromWhere}')
-        ],
+        ),
+        body: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const CartScreen(fromWhere: 'ListItemScreen'),
+                  ),
+                );
+              },
+              child: const Text(
+                'Cart',
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ListItemDetailsScreen(),
+                  ),
+                );
+              },
+              child: const Text(
+                'List Item details',
+              ),
+            ),
+            Text('From Where ${widget.fromWhere}')
+          ],
+        ),
       ),
     );
   }

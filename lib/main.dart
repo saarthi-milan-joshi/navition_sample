@@ -102,7 +102,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text(
                   'Route 1',
                 ),
-              )
+              ),
+
+              ElevatedButton(
+                onPressed: () {
+                  
+                },
+                child: const Text(
+                  'Route 2',
+                ),
+              ),
             ],
           ),
         ),

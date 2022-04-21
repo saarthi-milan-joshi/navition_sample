@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:navigation_sample/first_screen.dart';
+
+import 'list_item_screen.dart';
 
 class CheckoutScreen extends StatefulWidget {
   const CheckoutScreen({ Key? key, this.fromWhere }) : super(key: key);
@@ -19,6 +20,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         leading: IconButton(
           icon:  const Icon(Icons.arrow_back),
           onPressed: () {
+                       Navigator.pop(context);
            /* Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => const FirstScreen(fromWhere: 'SecondScreen',)),

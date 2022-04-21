@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigation_sample/main.dart';
 import 'package:navigation_sample/second_screen.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -19,11 +20,10 @@ class _FirstScreenState extends State<FirstScreen> {
         leading: IconButton(
           icon:  const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
-          /*  Navigator.push(
+            Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => ThirdScreen()),
-            ); */
+              MaterialPageRoute(builder: (context) => const MyHomePage(title: 'Flutter Demo Home Page')),
+            ); 
           },
         ),
       ),
@@ -31,7 +31,7 @@ class _FirstScreenState extends State<FirstScreen> {
         children: [
           ElevatedButton(
             onPressed: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>

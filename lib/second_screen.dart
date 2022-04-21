@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:navigation_sample/checkout_screen.dart';
+import 'package:navigation_sample/first_screen.dart';
 
 class SecondScreen extends StatefulWidget {
 
@@ -16,17 +18,27 @@ class _SecondScreenState extends State<SecondScreen> {
       return Scaffold(
       appBar: AppBar(
         title: const Text('Second Screen'),
+        leading: IconButton(
+          icon:  const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const FirstScreen(fromWhere: 'SecondScreen',)),
+            ); 
+          },
+        ),
+
       ),
       body: Column(
         children: [
            ElevatedButton(
               onPressed: () {
-                /* Navigator.push(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const SecondScreen(),
+                    builder: (context) => const CheckoutScreen(fromWhere: 'SecondScreen'),
                   ),
-                ); */
+                ); 
               },
               child: const Text(
                 'Next',

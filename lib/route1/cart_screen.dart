@@ -66,6 +66,8 @@ class _CartScreenState extends State<CartScreen> {
               padding: const EdgeInsets.all(20.0),
               child: TextFormField(
                 controller: textEditingController,
+                decoration:
+                    const InputDecoration(hintText: 'Please enter something'),
               ),
             ),
             ElevatedButton(
@@ -85,7 +87,7 @@ class _CartScreenState extends State<CartScreen> {
             const SizedBox(
               height: 20,
             ),
-            Text('From Where ${widget.fromWhere}')
+            // Text('From Where ${widget.fromWhere}')
           ],
         ),
       ),

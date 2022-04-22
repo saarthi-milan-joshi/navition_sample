@@ -59,7 +59,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               'Failer',
             ),
           ),
-          Text('From Where ${widget.fromWhere}')
+          // Text('From Where ${widget.fromWhere}')
         ],
       ),
     );

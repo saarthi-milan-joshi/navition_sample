@@ -18,7 +18,7 @@ class _ListItemScreenState extends State<ListItemScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pushReplacement(  
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => const MyHomePage(title: 'Home Page')),
@@ -82,7 +82,7 @@ class _ListItemScreenState extends State<ListItemScreen> {
                 'List Item details',
               ),
             ),
-            Text('From Where ${widget.fromWhere}')
+            // Text('From Where ${widget.fromWhere}')
           ],
         ),
       ),
